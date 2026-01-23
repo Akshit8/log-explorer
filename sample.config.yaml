@@ -1,0 +1,5 @@
+services:
+  - name: {{script name}}
+    accountId: {{CF_ACCOUNT_ID}}
+    apiToken: {{CF_API_TOKEN}}
+    env: {{script env}}

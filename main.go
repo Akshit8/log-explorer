@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/Akshit8/log-explorer/config"
 	log_parser "github.com/Akshit8/log-explorer/log-parser"
+	"github.com/Akshit8/log-explorer/loki"
 	"github.com/Akshit8/log-explorer/tail"
 )
 
@@ -17,6 +19,11 @@ func main() {
 	cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalf("Config Error: %v", err)
+	}
+
+	err = loki.InitLoki("http://localhost:3100/loki/api/v1/push")
+	if err != nil {
+		log.Fatalf("Failed to init Loki: %v", err)
 	}
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
@@ -53,13 +60,21 @@ func main() {
 						continue
 					}
 
-					for _, log := range parsedLog {
+					for _, l := range parsedLog {
 						fmt.Printf("[%s] %s | %d | %s -> %s\n",
-							log.Time.Format("15:04:05"),
-							log.Level,
-							log.Status,
-							log.URL,
-							log.Message)
+							l.Time.Format("15:04:05"),
+							l.Level,
+							l.Status,
+							l.URL,
+							l.Message)
+
+						rawLog, err := json.Marshal(l)
+						if err != nil {
+							log.Printf("Failed to marshal log: %v", err)
+							continue
+						}
+
+						loki.SendLogs(rawLog, svc.Name, l.Time)
 					}
 				}
 			}()
@@ -74,4 +89,6 @@ func main() {
 	}
 
 	wg.Wait()
+
+	loki.Close()
 }

@@ -10,8 +10,8 @@ import (
 	"sync"
 
 	"github.com/Akshit8/log-explorer/internal/parser"
+	"github.com/Akshit8/log-explorer/internal/provider"
 	"github.com/Akshit8/log-explorer/internal/storage"
-	"github.com/Akshit8/log-explorer/internal/tail"
 )
 
 func main() {
@@ -30,12 +30,12 @@ func main() {
 
 	var wg sync.WaitGroup
 
-	clients := []*tail.TailLogClient{}
+	clients := []*provider.TailLogClient{}
 
 	for _, svc := range cfg.Services {
 		wg.Add(1)
 		go func() {
-			client := tail.NewTailLogClient(svc.AccountID, svc.APIToken, svc.Name, nil)
+			client := provider.NewTailLogClient(svc.AccountID, svc.APIToken, svc.Name, nil)
 			clients = append(clients, client)
 
 			session, err := client.CreateSession(ctx)

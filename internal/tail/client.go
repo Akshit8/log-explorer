@@ -52,15 +52,8 @@ func NewTailLogClient(accountID, apiToken, workerName string, env *string) *Tail
 	}
 }
 
-func (c *TailLogClient) getTailURI() string {
-	if c.Env != nil {
-		return fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%s/workers/scripts/%s/%s/tails", c.AccountID, c.WorkerName, *c.Env)
-	}
-	return fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%s/workers/scripts/%s/tails", c.AccountID, c.WorkerName)
-}
-
 func (c *TailLogClient) CreateSession(ctx context.Context) (*TailResponse, error) {
-	apiURL := c.getTailURI()
+	apiURL := fmt.Sprintf("https://api.cloudflare.com/client/v4/accounts/%s/workers/scripts/%s/tails", c.AccountID, c.WorkerName)
 	
 	payload := map[string]any{"filters": []string{}}
 	body, err := json.Marshal(payload)

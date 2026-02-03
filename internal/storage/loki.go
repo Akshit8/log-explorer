@@ -1,4 +1,4 @@
-package loki
+package storage
 
 import (
 	"fmt"
@@ -29,16 +29,21 @@ func InitLoki(url string) error {
 }
 
 // SendLogs accepts the raw JSON byte slice and pushes it to Loki
-func SendLogs(logData []byte, serviceName string, t time.Time) {
+func SendLogs(logData []byte, name string, t time.Time, serviceEnv *string) {
 	if client == nil {
 		fmt.Println("Loki client not initialized")
 		return
 	}
 
+	env := "nil"
+	if serviceEnv != nil {
+		env = *serviceEnv
+	}
+
 	// Set static labels for the stream
 	labels := model.LabelSet{
-		"service": model.LabelValue(serviceName),
-		"codec":   "json",
+		"service_name": model.LabelValue(name),
+		"env": model.LabelValue(env),
 	}
 
 	err := client.Handle(labels, t, string(logData))

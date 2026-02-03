@@ -1,4 +1,4 @@
-package log_parser
+package parser
 
 import (
 	"encoding/json"
@@ -11,9 +11,11 @@ type Log struct {
 	Outcome    string `json:"outcome"`
 	ScriptName string `json:"scriptName"`
 	Logs       []struct {
-		Message   []string `json:"message"`
-		Level     string   `json:"level"`
-		Timestamp int64    `json:"timestamp"`
+		Message []struct {
+			Message   string `json:"message"`
+			Level     string `json:"level"`
+			Timestamp int64  `json:"timestamp"`
+		} `json:"message"`
 	} `json:"logs"`
 	Event struct {
 		Request struct {
@@ -56,8 +58,8 @@ func Parse(data []byte) ([]ParsedLog, error) {
 		}
 
 		entry := ParsedLog{
-			Time:    time.UnixMilli(l.Timestamp),
-			Level:   strings.ToUpper(l.Level),
+			Time:    time.UnixMilli(l.Message[0].Timestamp),
+			Level:   strings.ToUpper(l.Message[0].Level),
 			Method:  raw.Event.Request.Method,
 			URL:     raw.Event.Request.URL,
 			Status:  raw.Event.Response.Status,

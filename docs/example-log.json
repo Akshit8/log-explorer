@@ -1,0 +1,222 @@
+{
+    "wallTime": 390,
+    "cpuTime": 46,
+    "truncated": false,
+    "executionModel": "stateless",
+    "outcome": "ok",
+    "scriptTags": [
+        "cf:service=rtk-api",
+        "cf:environment=staging"
+    ],
+    "scriptVersion": {
+        "id": "973a8077-208a-4387-be84-3d7d7e8c44eb"
+    },
+    "scriptName": "rtk-api-staging",
+    "diagnosticsChannelEvents": [],
+    "exceptions": [],
+    "logs": [
+        {
+            "message": [
+                {
+                    "message": "Create Meeting Request",
+                    "level": "info",
+                    "time": "2026-02-03T06:21:48.731Z",
+                    "tags": {
+                        "source": "rtk-api",
+                        "cf": {
+                            "country": "IN",
+                            "colo": "MAA",
+                            "handler": "fetch"
+                        },
+                        "db_init": 67,
+                        "requestId": "6674e1da-6771-4896-aeed-a5dd817385ba",
+                        "appId": "389fba86-eaf3-4f89-bd85-5da4a6355314",
+                        "orgId": "389fba86-eaf3-4f89-bd85-5da4a6355314"
+                    }
+                }
+            ],
+            "level": "log",
+            "timestamp": 1770099708731
+        },
+        {
+            "message": [
+                {
+                    "message": "Creating meeting for organization 389fba86-eaf3-4f89-bd85-5da4a6355314",
+                    "level": "info",
+                    "time": "2026-02-03T06:21:48.731Z",
+                    "tags": {
+                        "source": "rtk-api",
+                        "cf": {
+                            "country": "IN",
+                            "colo": "MAA",
+                            "handler": "fetch"
+                        },
+                        "db_init": 67,
+                        "requestId": "6674e1da-6771-4896-aeed-a5dd817385ba",
+                        "appId": "389fba86-eaf3-4f89-bd85-5da4a6355314"
+                    }
+                }
+            ],
+            "level": "log",
+            "timestamp": 1770099708731
+        },
+        {
+            "message": [
+                {
+                    "message": "Creating ai config for meeting bbb578e3-e0ec-4996-9158-852306d8b260",
+                    "level": "info",
+                    "time": "2026-02-03T06:21:48.731Z",
+                    "tags": {
+                        "source": "rtk-api",
+                        "cf": {
+                            "country": "IN",
+                            "colo": "MAA",
+                            "handler": "fetch"
+                        },
+                        "db_init": 67,
+                        "requestId": "6674e1da-6771-4896-aeed-a5dd817385ba",
+                        "appId": "389fba86-eaf3-4f89-bd85-5da4a6355314"
+                    }
+                }
+            ],
+            "level": "log",
+            "timestamp": 1770099708731
+        },
+        {
+            "message": [
+                {
+                    "message": "Dyte Config type: AI_CONFIG not found for bbb578e3-e0ec-4996-9158-852306d8b260. Creating a default one",
+                    "level": "info",
+                    "time": "2026-02-03T06:21:48.753Z",
+                    "tags": {
+                        "source": "rtk-api",
+                        "cf": {
+                            "country": "IN",
+                            "colo": "MAA",
+                            "handler": "fetch"
+                        },
+                        "db_init": 67,
+                        "requestId": "6674e1da-6771-4896-aeed-a5dd817385ba",
+                        "appId": "389fba86-eaf3-4f89-bd85-5da4a6355314"
+                    }
+                }
+            ],
+            "level": "log",
+            "timestamp": 1770099708753
+        },
+        {
+            "message": [
+                {
+                    "message": "Upserting content AI_CONFIG for bbb578e3-e0ec-4996-9158-852306d8b260.",
+                    "level": "info",
+                    "time": "2026-02-03T06:21:48.846Z",
+                    "tags": {
+                        "source": "rtk-api",
+                        "cf": {
+                            "country": "IN",
+                            "colo": "MAA",
+                            "handler": "fetch"
+                        },
+                        "db_init": 67,
+                        "requestId": "6674e1da-6771-4896-aeed-a5dd817385ba",
+                        "appId": "389fba86-eaf3-4f89-bd85-5da4a6355314"
+                    }
+                }
+            ],
+            "level": "log",
+            "timestamp": 1770099708846
+        }
+    ],
+    "eventTimestamp": 1770099708627,
+    "event": {
+        "request": {
+            "url": "https://api0.staging.realtime.cloudflare.com/v2/meetings",
+            "method": "POST",
+            "headers": {
+                "accept": "*/*",
+                "accept-encoding": "gzip, br",
+                "authorization": "REDACTED",
+                "cf-connecting-ip": "104.28.220.169",
+                "cf-ipcountry": "IN",
+                "cf-ray": "9c7fd48ad90438e6",
+                "cf-visitor": "{\"scheme\":\"https\"}",
+                "connection": "Keep-Alive",
+                "content-length": "248",
+                "content-type": "application/json",
+                "host": "rtk-staging.realtime.cloudflare.com",
+                "postman-token": "REDACTED",
+                "user-agent": "PostmanRuntime/7.51.0",
+                "x-forwarded-proto": "https",
+                "x-real-ip": "104.28.220.169",
+                "x-request-id": "6674e1da-6771-4896-aeed-a5dd817385ba"
+            },
+            "cf": {
+                "httpProtocol": "HTTP/1.1",
+                "clientAcceptEncoding": "gzip, deflate, br",
+                "requestPriority": "",
+                "edgeRequestKeepAliveStatus": 1,
+                "requestHeaderNames": {},
+                "clientTcpRtt": 0,
+                "colo": "MAA",
+                "asn": 13335,
+                "asOrganization": "Cloudflare, Inc.",
+                "country": "IN",
+                "isEUCountry": false,
+                "city": "Bengaluru",
+                "continent": "AS",
+                "region": "Karnataka",
+                "regionCode": "KA",
+                "timezone": "Asia/Kolkata",
+                "longitude": "77.59369",
+                "latitude": "12.97194",
+                "postalCode": "562114",
+                "tlsVersion": "TLSv1.3",
+                "tlsCipher": "AEAD-AES128-GCM-SHA256",
+                "tlsClientRandom": "VxfmQq2XpyeIxqdROu2I0gGxi7WV/bvINSgetCfGCU8=",
+                "tlsClientCiphersSha1": "t62J38GPEn0CUIMdygJMuIMfHlg=",
+                "tlsClientExtensionsSha1": "IDS2jshLLK/HGrjct4bpWAlzt4s=",
+                "tlsClientExtensionsSha1Le": "f0GI4lWgjQCmrfuxp8ErVr/D19M=",
+                "tlsExportedAuthenticator": {
+                    "clientHandshake": "d20a67210a0a6612c8c84e44ae79d718f954a48fab7585681c2237f7df8a4ca1",
+                    "serverHandshake": "222261cd7f341eac87b61bbf9f78fc38eddcafc830a4ff3ebc8819a867aa4756",
+                    "clientFinished": "6985c14841b1067c3f04c97fa6e251e9eb677b9554b535e8a9d51d65db4a4c1a",
+                    "serverFinished": "60e77f83246fce845c800089f5d343cc30cce38644e83bab430fb0186e53a5de"
+                },
+                "tlsClientHelloLength": "1487",
+                "tlsClientAuth": {
+                    "certPresented": "0",
+                    "certVerified": "NONE",
+                    "certRevoked": "0",
+                    "certIssuerDN": "",
+                    "certSubjectDN": "",
+                    "certIssuerDNRFC2253": "",
+                    "certSubjectDNRFC2253": "",
+                    "certIssuerDNLegacy": "",
+                    "certSubjectDNLegacy": "",
+                    "certSerial": "",
+                    "certIssuerSerial": "",
+                    "certSKI": "",
+                    "certIssuerSKI": "",
+                    "certFingerprintSHA1": "",
+                    "certFingerprintSHA256": "",
+                    "certNotBefore": "",
+                    "certNotAfter": ""
+                },
+                "verifiedBotCategory": "",
+                "botManagement": {
+                    "corporateProxy": false,
+                    "verifiedBot": false,
+                    "jsDetection": {
+                        "passed": false
+                    },
+                    "staticResource": false,
+                    "detectionIds": {},
+                    "score": 99
+                }
+            }
+        },
+        "response": {
+            "status": 201
+        }
+    }
+}

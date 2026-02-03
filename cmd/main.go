@@ -9,19 +9,18 @@ import (
 	"os/signal"
 	"sync"
 
-	"github.com/Akshit8/log-explorer/config"
-	log_parser "github.com/Akshit8/log-explorer/log-parser"
-	"github.com/Akshit8/log-explorer/loki"
-	"github.com/Akshit8/log-explorer/tail"
+	"github.com/Akshit8/log-explorer/internal/parser"
+	"github.com/Akshit8/log-explorer/internal/storage"
+	"github.com/Akshit8/log-explorer/internal/tail"
 )
 
 func main() {
-	cfg, err := config.LoadConfig()
+	cfg, err := LoadConfig()
 	if err != nil {
 		log.Fatalf("Config Error: %v", err)
 	}
 
-	err = loki.InitLoki("http://localhost:3100/loki/api/v1/push")
+	err = storage.InitLoki("http://localhost:3100/loki/api/v1/push")
 	if err != nil {
 		log.Fatalf("Failed to init Loki: %v", err)
 	}
@@ -36,8 +35,6 @@ func main() {
 	for _, svc := range cfg.Services {
 		wg.Add(1)
 		go func() {
-			log.Printf("Service: %s, Account ID: %s, API Token: %s, Env: %v", svc.Name, svc.AccountID, svc.APIToken, svc.Env)
-
 			client := tail.NewTailLogClient(svc.AccountID, svc.APIToken, svc.Name, nil)
 			clients = append(clients, client)
 
@@ -54,7 +51,7 @@ func main() {
 			go func() {
 				defer wg.Done()
 				for logEntry := range logs {
-					parsedLog, err := log_parser.Parse(logEntry)
+					parsedLog, err := parser.Parse(logEntry)
 					if err != nil {
 						log.Printf("Failed to parse log: %v", err)
 						continue
@@ -74,7 +71,8 @@ func main() {
 							continue
 						}
 
-						loki.SendLogs(rawLog, svc.Name, l.Time)
+						fmt.Println(string(rawLog), svc.Name)
+						storage.SendLogs(rawLog, svc.Name, l.Time, svc.Env)
 					}
 				}
 			}()
@@ -90,5 +88,5 @@ func main() {
 
 	wg.Wait()
 
-	loki.Close()
+	storage.Close()
 }
